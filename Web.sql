@@ -1,0 +1,40 @@
+create database Test
+use Test
+
+CREATE TABLE USUARIOS(
+ID_column int not null identity(1,1) primary key,
+FIRST_NAME varchar(50) not null,
+LAST_NAME varchar(50) not null,
+EMAIL varchar(100) not null,
+PHONE int not null,
+BIRTH_MONTH varchar(10) not null,
+BITH_DAY int not null,
+PASSWORD varchar(50) not null
+)
+
+
+INSERT USUARIOS(FIRST_NAME, LAST_NAME, EMAIL, PHONE, BIRTH_MONTH, BITH_DAY, PASSWORD) VALUES ('Pablo','Del Pino','pablo@gmail.com','4315627','Diciembre', '31', 'holaqueonda')
+
+SELECT * FROM USUARIOS
+
+--PROCEDIMIENTO ALMACENADO QUE RECUPERA DATOS
+USE Test
+GO
+SET ANSI_NULLS ON
+GO 
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[SPSUSUARIOS]
+AS
+BEGIN
+	SELECT ID_column 'ID',
+	FIRST_NAME 'NOMBRE',
+	LAST_NAME 'APELLIDO',
+	PHONE 'TELEFONO',
+	BIRTH_MONTH 'MES',
+	BITH_DAY 'DIA',
+	PASSWORD 'PASS'
+	FROM USUARIOS
+END
+
+EXEC [SPSUSUARIOS]
